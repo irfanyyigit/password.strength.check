@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Şifre Güçlülük Kontrolü</title>
+  <link rel="stylesheet" href="style.css" class="css">
+</head>
+<body>
+
+  <h2>Şifrenizi Girin:</h2>
+
+  <input type="password" id="password" placeholder="Şifre girin...">
+  <button id="toggleBtn">Göster</button>
+
+  <div id="strengthMessage"></div>
+
+  <div id="strengthBar">
+    <div id="strengthFill"></div>
+  </div>
+
+  <script>
+        //burada verilen id'ler göre atamalar yapılır (getelemntbyıd)
+        const passwordInput = document.getElementById("password");
+        const strengthMessage = document.getElementById("strengthMessage");
+        const strengthFill = document.getElementById("strengthFill");
+        const toggleBtn = document.getElementById("toggleBtn");
+
+//şifreyı gösterme gizleme fonksiyonu burada gerçekleşir
+    toggleBtn.addEventListener("click", function () {
+      const type = passwordInput.getAttribute("type");
+      if (type === "password") {
+        passwordInput.setAttribute("type", "text");
+        toggleBtn.textContent = "Gizle";
+      } else {
+        passwordInput.setAttribute("type", "password");
+        toggleBtn.textContent = "Göster";
+      }
+    });
+
+//bundan sonrası şifre kontrolüdür diğer işlemler(strengthbar, yazıya göre metnın yer değiştirmesi vs)
+    passwordInput.addEventListener("input", function () {
+      const password = passwordInput.value;
+      const strength = checkPasswordStrength(password);
+
+      strengthMessage.textContent = strength.text;
+      strengthMessage.style.color = strength.color;
+      strengthFill.style.width = strength.width;
+      strengthFill.style.backgroundColor = strength.color;
+    });
+
+    function checkPasswordStrength(password) {
+      const hasUpper = /[A-Z]/.test(password);
+      const hasLower = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSymbol = /[\W_]/.test(password);
+      const length = password.length;
+
+      if (length === 0) {
+        return { text: "", color: "black", width: "0%" };
+      }
+
+      if (length < 6) {
+        return { text: "Çok zayıf", color: "red", width: "20%" };
+      }
+
+      if (length >= 6 && hasLower && hasNumber) {
+        if (hasUpper && hasSymbol && length >= 8) {
+          return { text: "Güçlü şifre", color: "green", width: "100%" };
+        }
+        return { text: "Orta seviye şifre", color: "orange", width: "60%" };
+      }
+
+      return { text: "Zayıf şifre", color: "red", width: "30%" };
+    }
+  </script>
+</body>
+</html>
