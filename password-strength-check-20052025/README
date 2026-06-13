@@ -1,0 +1,28 @@
+# Password Strength Checker
+ 
+## Description
+ 
+A simple web-based tool that checks the strength of a password in real time as the user types. It evaluates the password based on length, uppercase and lowercase letters, numbers, and special characters, then displays a strength message and a visual strength bar. It also includes a show/hide password toggle button.
+ 
+## Technologies
+ 
+- HTML
+- CSS
+- JavaScript
+## Installation
+ 
+1. Clone or download this repository to your computer.
+2. Open the project folder.
+3. Open the `index.html` file in any web browser (Chrome, Firefox, Edge, etc.).
+No additional setup or dependencies are required.
+ 
+## Usage
+ 
+1. Open the application in your browser.
+2. Type a password into the input field.
+3. The strength message and the strength bar will update automatically based on the password's complexity:
+   - Very weak: short passwords (less than 6 characters)
+   - Weak: passwords missing required character types
+   - Medium: passwords with lowercase letters and numbers
+   - Strong: passwords with uppercase letters, lowercase letters, numbers, symbols, and at least 8 characters
+4. Click the "Show/Hide" button to toggle password visibility.
